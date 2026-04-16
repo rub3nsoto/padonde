@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import AgeVerificationModal from "@/components/modals/AgeVerificationModal";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -29,7 +36,7 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="es" suppressHydrationWarning>
+      <html lang="es" suppressHydrationWarning className={inter.variable}>
         <head />
         <body>
           {/* Verificación de edad — modal obligatorio en primer acceso */}
