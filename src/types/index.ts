@@ -42,6 +42,7 @@ export interface User {
 
 export interface UserPublic {
   id: string;
+  clerkId?: string;
   nombre: string;
   foto?: string;
   bio?: string;
