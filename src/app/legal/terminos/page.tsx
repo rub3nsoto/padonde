@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // Términos y Condiciones COMPLETOS de Eventure
 // Última actualización: 2024
 import Link from "next/link";

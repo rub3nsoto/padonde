@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 "use client";
 // Eventos del usuario — los que va a asistir y los que organiza
 import { useState, useEffect } from "react";

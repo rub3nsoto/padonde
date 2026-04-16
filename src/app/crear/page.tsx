@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 "use client";
 // Wizard de creación/edición de evento en 8 pasos
 import { useState, useEffect, useRef, useCallback } from "react";

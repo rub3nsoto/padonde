@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 "use client";
 // Gestión de asistentes de un evento — solo para el organizador
 import { useState, useEffect, useCallback } from "react";

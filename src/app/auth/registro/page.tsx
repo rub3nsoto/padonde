@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 "use client";
 // Página de registro — formulario de perfil post-Clerk con verificación de edad
 import { useState, useEffect } from "react";

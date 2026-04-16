@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 "use client";
 // Panel del organizador — gestión de eventos, asistentes y solicitudes
 import { useState, useEffect } from "react";
