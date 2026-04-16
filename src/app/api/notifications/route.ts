@@ -32,10 +32,17 @@ export async function PATCH(req: NextRequest) {
   const user = await prisma.user.findUnique({ where: { clerkId } });
   if (!user) return NextResponse.json({ error: "No encontrado" }, { status: 404 });
 
-  const body = await req.json();
-  const ids  = body.ids as string[] | undefined;
+  const body           = await req.json();
+  const notificationId = body.notificationId as string | undefined;
+  const ids            = body.ids as string[] | undefined;
 
-  if (ids && ids.length > 0) {
+  if (notificationId) {
+    // Marcar notificación individual como leída
+    await prisma.notification.update({
+      where: { id: notificationId },
+      data:  { leida: true },
+    });
+  } else if (ids && ids.length > 0) {
     await prisma.notification.updateMany({
       where: { id: { in: ids }, userId: user.id },
       data:  { leida: true },

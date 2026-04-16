@@ -141,7 +141,7 @@ export default function EventDetailClient({ initialEvent, invToken, pagoStatus }
   const pct = getPorcentajeCapacidad(event.asistentesCount || 0, event.capacidadMaxima);
   const isFull = event.capacidadMaxima && (event.asistentesCount || 0) >= event.capacidadMaxima;
 
-  const isCreator = isSignedIn && user?.id && event.creator.id === event.creatorId;
+  const isCreator = isSignedIn && user?.id && user.id === event.creator.clerkId;
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">

@@ -109,7 +109,7 @@ export default function EventFilters({ filters, onChange }: Props) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.97 }}
               transition={{ duration: 0.15 }}
-              className="absolute left-0 top-12 z-50 w-80 bg-white border border-surface-500 rounded-2xl shadow-card-hover p-5"
+              className="absolute left-0 top-12 z-50 w-[min(320px,calc(100vw-1rem))] bg-white border border-surface-500 rounded-2xl shadow-card-hover p-5 max-h-[80vh] overflow-y-auto"
             >
               {/* Header */}
               <div className="flex items-center justify-between mb-5">

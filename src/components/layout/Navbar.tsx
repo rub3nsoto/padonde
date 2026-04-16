@@ -18,7 +18,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const { isSignedIn, user } = useUser();
+  const { isSignedIn, user, isLoaded } = useUser();
   const pathname             = usePathname();
   const [scrolled, setScrolled]       = useState(false);
   const [mobileOpen, setMobileOpen]   = useState(false);
@@ -86,15 +86,15 @@ export default function Navbar() {
 
             {/* Acciones derecha */}
             <div className="flex items-center gap-2">
-              {isSignedIn ? (
+              {!isLoaded ? (
+                <div className="w-8 h-8 skeleton rounded-full" />
+              ) : isSignedIn ? (
                 <>
-                  {/* Crear evento */}
                   <Link href="/crear" className="hidden sm:flex btn-primary py-2 px-4 text-sm">
                     <Plus className="w-4 h-4" />
                     Crear evento
                   </Link>
 
-                  {/* Notificaciones */}
                   <button
                     onClick={() => setNotifOpen(!notifOpen)}
                     className="relative p-2 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-all"
@@ -107,7 +107,6 @@ export default function Navbar() {
                     )}
                   </button>
 
-                  {/* Avatar de Clerk */}
                   <UserButton
                     appearance={{
                       elements: {

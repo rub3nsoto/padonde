@@ -497,7 +497,7 @@ export default function CrearEventoPage() {
           {/* ── STEP 3: Ubicación ── */}
           {step === 3 && (
             <div className="space-y-4">
-              <div className="relative">
+              <div className="relative z-[100]">
                 <label className="label">Dirección *</label>
                 <input
                   type="text"

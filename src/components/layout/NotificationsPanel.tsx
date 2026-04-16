@@ -122,9 +122,19 @@ export default function NotificationsPanel({ open, onClose, onRead }: Props) {
                       <div
                         key={n.id}
                         className={cn(
-                          "flex gap-3 p-4 hover:bg-surface-600 transition-colors",
+                          "flex gap-3 p-4 hover:bg-surface-600 transition-colors cursor-pointer",
                           !n.leida && "bg-brand-500/5"
                         )}
+                        onClick={async () => {
+                          if (!n.leida) {
+                            await fetch("/api/notifications", {
+                              method: "PATCH",
+                              headers: { "Content-Type": "application/json" },
+                              body: JSON.stringify({ notificationId: n.id }),
+                            });
+                            setNotifs((prev) => prev.map((x) => x.id === n.id ? { ...x, leida: true } : x));
+                          }
+                        }}
                       >
                         <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0", color)}>
                           <Icon className="w-4 h-4" />

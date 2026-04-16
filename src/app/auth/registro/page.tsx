@@ -48,6 +48,7 @@ export default function RegistroPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!form.nombre.trim()) { toast.error("El nombre es requerido para continuar"); return; }
     if (!form.aceptoTerminos) { toast.error("Debes aceptar los términos y condiciones"); return; }
     if (!form.fechaNacimiento) { toast.error("Ingresa tu fecha de nacimiento"); return; }
     if (!mayorEdad) { toast.error("Debes ser mayor de 18 años para usar Eventure"); return; }
