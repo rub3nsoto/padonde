@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // GET  /api/events  — Lista de eventos con filtros
 // POST /api/events  — Crear nuevo evento (requiere auth)
 import { auth } from "@clerk/nextjs/server";

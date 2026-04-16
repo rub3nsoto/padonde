@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // GET /api/attendances/mine — Asistencias del usuario actual (para mis-eventos)
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";

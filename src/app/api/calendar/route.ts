@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // GET /api/calendar?eventId=xxx — Descargar archivo .ics del evento
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";

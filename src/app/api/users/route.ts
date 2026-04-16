@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // POST /api/users — Crear o actualizar perfil de usuario (llamado tras registro de Clerk)
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";

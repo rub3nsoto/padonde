@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // GET   /api/notifications — Mis notificaciones
 // PATCH /api/notifications — Marcar como leídas
 import { auth } from "@clerk/nextjs/server";

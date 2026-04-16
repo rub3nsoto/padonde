@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // Stripe deshabilitado en modo local
 import { NextResponse } from "next/server";
 

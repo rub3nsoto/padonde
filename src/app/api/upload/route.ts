@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // POST /api/upload — Upload de media a Cloudinary
 // Acepta multipart/form-data con campo "file" + "eventId" + "orden"
 import { auth } from "@clerk/nextjs/server";

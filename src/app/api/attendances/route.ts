@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // POST   /api/attendances  — Registrar asistencia / solicitar invitación
 // GET    /api/attendances  — Lista de asistentes de un evento (solo organizador)
 // PATCH  /api/attendances  — Aprobar / rechazar solicitud (solo organizador)

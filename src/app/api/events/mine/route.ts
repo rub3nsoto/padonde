@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // GET /api/events/mine — Eventos creados por el usuario actual (para el dashboard)
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";

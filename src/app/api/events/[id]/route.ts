@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // GET    /api/events/:id — Detalle de evento
 // PATCH  /api/events/:id — Editar evento (solo el creador) + notifica asistentes
 // DELETE /api/events/:id — Cancelar evento (solo el creador) + notifica asistentes

@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // GET   /api/users/:id — Perfil público de usuario
 // PATCH /api/users/:id — Actualizar propio perfil
 import { auth } from "@clerk/nextjs/server";
