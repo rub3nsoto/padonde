@@ -1,4 +1,3 @@
-export const dynamic = "force-dynamic";
 // Aviso de Privacidad COMPLETO — Cumplimiento LFPDPPP (México)
 import Link from "next/link";
 

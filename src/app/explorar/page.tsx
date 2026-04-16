@@ -1,4 +1,3 @@
-export const dynamic = "force-dynamic";
 "use client";
 // Página de exploración — mapa + lista de eventos con filtros
 import { useState, useEffect, useCallback, useRef } from "react";
