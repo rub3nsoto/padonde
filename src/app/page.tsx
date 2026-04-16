@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // Landing page — muestra eventos destacados + CTA de registro
 import Link from "next/link";
 import Image from "next/image";

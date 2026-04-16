@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // Página de detalle de evento — Server Component con Client islands
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
