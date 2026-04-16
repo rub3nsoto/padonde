@@ -83,7 +83,7 @@ export default function DashboardPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-white text-lg mb-4">Inicia sesión para ver tu dashboard</p>
+          <p className="text-gray-200 text-lg mb-4">Inicia sesión para ver tu dashboard</p>
           <Link href="/auth/login" className="btn-primary">Iniciar sesión</Link>
         </div>
       </div>
@@ -120,7 +120,7 @@ export default function DashboardPage() {
         ].map((m) => (
           <div key={m.label} className="card p-5">
             <m.icon className={cn("w-5 h-5 mb-3", m.color)} />
-            <p className="text-2xl font-black text-white">{m.value}</p>
+            <p className="text-2xl font-black text-gray-900">{m.value}</p>
             <p className="text-xs text-gray-500 mt-0.5">{m.label}</p>
           </div>
         ))}
@@ -162,7 +162,7 @@ export default function DashboardPage() {
           ) : events.length === 0 ? (
             <div className="py-16 text-center card">
               <div className="text-5xl mb-4">🎉</div>
-              <h3 className="text-white font-semibold mb-2">Aún no tienes eventos</h3>
+              <h3 className="text-gray-200 font-semibold mb-2">Aún no tienes eventos</h3>
               <p className="text-gray-500 text-sm mb-6">Crea tu primer evento y empieza a conectar personas</p>
               <Link href="/crear" className="btn-primary mx-auto w-fit">Crear evento</Link>
             </div>
@@ -191,7 +191,7 @@ export default function DashboardPage() {
                 <button onClick={() => { setTab("eventos"); setSelectedEvent(null); }} className="btn-ghost text-sm">
                   ← Volver
                 </button>
-                <h2 className="text-white font-semibold">{selectedEvent.nombre}</h2>
+                <h2 className="text-gray-200 font-semibold">{selectedEvent.nombre}</h2>
               </div>
 
               {attendances.length === 0 ? (
@@ -249,7 +249,7 @@ function EventRow({
         {/* Info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-start gap-2">
-            <h3 className="font-semibold text-white truncate">{event.nombre}</h3>
+            <h3 className="font-semibold text-gray-900 truncate">{event.nombre}</h3>
             <span className={cn(
               "badge text-xs flex-shrink-0",
               event.estado === "ACTIVE"    ? "bg-green-500/10 text-green-400 border border-green-500/20" :
@@ -330,7 +330,7 @@ function AttendanceRow({
       )}
 
       <div className="flex-1 min-w-0">
-        <p className="text-white font-medium text-sm">{u?.nombre}</p>
+        <p className="text-gray-900 font-medium text-sm">{u?.nombre}</p>
         <p className="text-gray-500 text-xs">{timeAgo(attendance.createdAt)}</p>
       </div>
 

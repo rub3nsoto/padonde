@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Zap, Shield, MapPin, Users, Star } from "lucide-react";
+import { auth } from "@clerk/nextjs/server";
 import { prisma } from "@/lib/prisma";
 import EventCard from "@/components/events/EventCard";
 import type { Event } from "@/types";
@@ -82,6 +83,7 @@ const STATS = [
 ];
 
 export default async function LandingPage() {
+  const { userId } = await auth();
   const events = await getFeaturedEvents();
 
   return (
@@ -125,9 +127,11 @@ export default async function LandingPage() {
               Explorar eventos
               <ArrowRight className="w-5 h-5" />
             </Link>
-            <Link href="/auth/registro" className="btn-secondary text-lg px-8 py-4">
-              Crear cuenta gratis
-            </Link>
+            {!userId && (
+              <Link href="/auth/registro" className="btn-secondary text-lg px-8 py-4">
+                Crear cuenta gratis
+              </Link>
+            )}
           </div>
 
           {/* Stats */}
