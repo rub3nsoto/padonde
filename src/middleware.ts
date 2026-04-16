@@ -19,7 +19,7 @@ export default clerkMiddleware(async (auth, req) => {
       return NextResponse.redirect(loginUrl);
     }
   }
-}, { clockSkewInMs: 120_000 });
+});
 
 export const config = {
   matcher: [

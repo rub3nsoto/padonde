@@ -15,7 +15,7 @@ const CreateUserSchema = z.object({
 });
 
 export async function POST(req: NextRequest) {
-  const { userId: clerkId } = await auth({ clockSkewInMs: 120_000 });
+  const { userId: clerkId } = await auth();
   if (!clerkId) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
   const body = await req.json();
@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-  const { userId: clerkId } = await auth({ clockSkewInMs: 120_000 });
+  const { userId: clerkId } = await auth();
   if (!clerkId) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
   const user = await prisma.user.findUnique({

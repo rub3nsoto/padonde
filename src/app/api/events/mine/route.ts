@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 export async function GET(req: NextRequest) {
-  const { userId: clerkId } = await auth({ clockSkewInMs: 120_000 });
+  const { userId: clerkId } = await auth();
   if (!clerkId) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
   const user = await prisma.user.findUnique({ where: { clerkId } });

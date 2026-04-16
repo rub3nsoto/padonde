@@ -14,7 +14,7 @@ export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const { userId: clerkId } = await auth({ clockSkewInMs: 120_000 });
+  const { userId: clerkId } = await auth();
 
   const evento = await prisma.event.findUnique({
     where: { id: params.id },
@@ -97,7 +97,7 @@ export async function PATCH(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const { userId: clerkId } = await auth({ clockSkewInMs: 120_000 });
+  const { userId: clerkId } = await auth();
   if (!clerkId) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
   const user = await prisma.user.findUnique({ where: { clerkId } });
@@ -209,7 +209,7 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const { userId: clerkId } = await auth({ clockSkewInMs: 120_000 });
+  const { userId: clerkId } = await auth();
   if (!clerkId) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
   const user = await prisma.user.findUnique({ where: { clerkId } });

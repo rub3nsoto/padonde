@@ -14,7 +14,7 @@ import {
 // ─── GET — Asistentes de un evento ───────────────────────────
 
 export async function GET(req: NextRequest) {
-  const { userId: clerkId } = await auth({ clockSkewInMs: 120_000 });
+  const { userId: clerkId } = await auth();
   if (!clerkId) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
   const eventId = req.nextUrl.searchParams.get("eventId");
@@ -50,7 +50,7 @@ const CreateAttendanceSchema = z.object({
 });
 
 export async function POST(req: NextRequest) {
-  const { userId: clerkId } = await auth({ clockSkewInMs: 120_000 });
+  const { userId: clerkId } = await auth();
   if (!clerkId) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
   const user = await prisma.user.findUnique({ where: { clerkId } });
@@ -151,7 +151,7 @@ const UpdateAttendanceSchema = z.object({
 });
 
 export async function PATCH(req: NextRequest) {
-  const { userId: clerkId } = await auth({ clockSkewInMs: 120_000 });
+  const { userId: clerkId } = await auth();
   if (!clerkId) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
   const user = await prisma.user.findUnique({ where: { clerkId } });
@@ -219,7 +219,7 @@ export async function PATCH(req: NextRequest) {
 // ─── DELETE — Cancelar asistencia ────────────────────────────
 
 export async function DELETE(req: NextRequest) {
-  const { userId: clerkId } = await auth({ clockSkewInMs: 120_000 });
+  const { userId: clerkId } = await auth();
   if (!clerkId) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
   const eventId = req.nextUrl.searchParams.get("eventId");

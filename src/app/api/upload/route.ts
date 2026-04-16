@@ -10,7 +10,7 @@ const MAX_VIDEOS = 2;
 const MAX_FILE_SIZE = 100 * 1024 * 1024; // 100MB
 
 export async function POST(req: NextRequest) {
-  const { userId: clerkId } = await auth({ clockSkewInMs: 120_000 });
+  const { userId: clerkId } = await auth();
   if (!clerkId) return NextResponse.json({ error: "No autenticado" }, { status: 401 });
 
   const user = await prisma.user.findUnique({ where: { clerkId } });
