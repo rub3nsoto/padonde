@@ -1,0 +1,196 @@
+// Eventure - Plataforma de eventos sociales urbanos +18
+// Decisión técnica: PostgreSQL por soporte de tipos geoespaciales y JSONB
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum EventType {
+  PARTY       // Fiesta
+  CONCERT     // Concierto
+  SPORT       // Deporte
+  AFTERPARTY  // Afterparty
+  NETWORKING  // Networking
+  CULTURAL    // Cultural
+  OTHER       // Otro
+}
+
+enum PrivacyType {
+  PUBLIC    // Visible para todos
+  LINK      // Solo con URL única
+  APPROVAL  // Aprobación manual del organizador
+}
+
+enum EventStatus {
+  DRAFT      // Borrador
+  ACTIVE     // Publicado y activo
+  CANCELLED  // Cancelado
+  FINISHED   // Finalizado
+}
+
+enum AttendanceStatus {
+  CONFIRMED // Asistencia confirmada
+  PENDING   // Solicitud pendiente (eventos con aprobación)
+  REJECTED  // Solicitud rechazada
+  RESERVED  // Reservado con pago (Stripe)
+  CANCELLED // Canceló su asistencia
+}
+
+enum MediaType {
+  PHOTO
+  VIDEO
+}
+
+enum NotificationType {
+  ATTENDANCE_CONFIRMED
+  ATTENDANCE_APPROVED
+  ATTENDANCE_REJECTED
+  EVENT_REMINDER
+  EVENT_CANCELLED
+  EVENT_UPDATED
+  NEW_NEARBY_EVENT
+  INVITATION_RECEIVED
+}
+
+model User {
+  id               String    @id @default(cuid())
+  clerkId          String    @unique // ID externo de Clerk
+  email            String    @unique
+  nombre           String
+  fechaNacimiento  DateTime
+  foto             String?   // URL de Cloudinary
+  bio              String?   @db.Text
+  verificadoEdad   Boolean   @default(false)
+  aceptoTerminos   Boolean   @default(false)
+  fechaAceptacion  DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  // Relaciones
+  eventosCreados   Event[]         @relation("EventCreator")
+  asistencias      Attendance[]
+  notificaciones   Notification[]
+  invitaciones     Invitation[]    @relation("InvitationCreator")
+
+  @@map("users")
+}
+
+model Event {
+  id               String       @id @default(cuid())
+  creatorId        String
+  nombre           String
+  descripcion      String       @db.Text
+  tipo             EventType
+  tags             String[]     // Etiquetas flexibles
+  fechaInicio      DateTime
+  fechaFin         DateTime
+  zonaHoraria      String       @default("America/Mexico_City")
+
+  // Ubicación
+  direccion        String
+  ciudad           String
+  lat              Float
+  lng              Float
+
+  // Configuración
+  capacidadMaxima  Int?         // null = ilimitado
+  privacidad       PrivacyType  @default(PUBLIC)
+  codigoVestimenta String?
+  precio           Float?       // null = gratis
+  moneda           String       @default("MXN")
+  instrucciones    String?      @db.Text
+
+  // Lista de espera
+  aceptarSolicitudesCuandoLleno Boolean @default(false) // Acepta PENDING cuando el cupo está lleno
+
+  // Estado y métricas
+  estado           EventStatus  @default(DRAFT)
+  vistas           Int          @default(0)
+  linkUnico        String?      @unique // Para eventos LINK
+
+  // Timestamps
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  // Relaciones
+  creator          User         @relation("EventCreator", fields: [creatorId], references: [id], onDelete: Cascade)
+  media            EventMedia[]
+  asistencias      Attendance[]
+  invitaciones     Invitation[]
+  notificaciones   Notification[]
+
+  @@index([lat, lng])           // Para búsquedas geoespaciales
+  @@index([fechaInicio])
+  @@index([tipo])
+  @@index([estado])
+  @@map("events")
+}
+
+model EventMedia {
+  id        String    @id @default(cuid())
+  eventId   String
+  url       String    // URL de Cloudinary
+  publicId  String    // ID en Cloudinary para poder eliminar
+  tipo      MediaType
+  orden     Int       @default(0)
+  createdAt DateTime  @default(now())
+
+  event     Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@map("event_media")
+}
+
+model Attendance {
+  id              String           @id @default(cuid())
+  userId          String
+  eventId         String
+  estado          AttendanceStatus @default(CONFIRMED)
+  stripeSessionId String?          // Para asistencias de pago
+  notaOrganizador String?          // Nota al aprobar/rechazar
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event           Event            @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId])
+  @@map("attendances")
+}
+
+model Invitation {
+  id           String   @id @default(cuid())
+  eventId      String
+  creatorId    String
+  token        String   @unique @default(cuid())
+  usosMaximos  Int?     // null = usos ilimitados
+  usosActuales Int      @default(0)
+  expiraEn     DateTime?
+  createdAt    DateTime @default(now())
+
+  event        Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  creator      User     @relation("InvitationCreator", fields: [creatorId], references: [id])
+
+  @@map("invitations")
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  eventId   String?
+  tipo      NotificationType
+  titulo    String
+  mensaje   String
+  leida     Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event     Event?           @relation(fields: [eventId], references: [id], onDelete: SetNull)
+
+  @@index([userId, leida])
+  @@map("notifications")
+}
