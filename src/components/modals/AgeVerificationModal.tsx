@@ -48,7 +48,7 @@ export default function AgeVerificationModal() {
             className="w-full max-w-md"
           >
             {/* Fondo con glow */}
-            <div className="relative bg-surface-800 border border-surface-500 rounded-3xl p-8 shadow-brand-lg">
+            <div className="relative bg-gray-950 border border-gray-800 rounded-3xl p-8 shadow-brand-lg">
               {/* Decoración de fondo */}
               <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-40 h-40 bg-brand-500/20 rounded-full blur-3xl pointer-events-none" />
 
@@ -90,7 +90,7 @@ export default function AgeVerificationModal() {
                       className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${
                         checkEdad
                           ? "bg-brand-500 border-brand-500"
-                          : "border-surface-400 bg-surface-600 group-hover:border-brand-400"
+                          : "border-gray-600 bg-gray-800 group-hover:border-brand-400"
                       }`}
                     >
                       {checkEdad && (
@@ -117,7 +117,7 @@ export default function AgeVerificationModal() {
                       className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${
                         checkTerminos
                           ? "bg-brand-500 border-brand-500"
-                          : "border-surface-400 bg-surface-600 group-hover:border-brand-400"
+                          : "border-gray-600 bg-gray-800 group-hover:border-brand-400"
                       }`}
                     >
                       {checkTerminos && (
