@@ -76,9 +76,9 @@ export default async function PerfilPage({ params }: { params: { id: string } })
 
           {/* Info */}
           <div className="flex-1 text-center sm:text-left">
-            <h1 className="text-2xl font-black text-white mb-2">{user.nombre}</h1>
+            <h1 className="text-2xl font-black text-gray-900 mb-2">{user.nombre}</h1>
             {user.bio && (
-              <p className="text-gray-400 text-sm leading-relaxed mb-4">{user.bio}</p>
+              <p className="text-gray-500 text-sm leading-relaxed mb-4">{user.bio}</p>
             )}
             <div className="flex flex-wrap gap-4 justify-center sm:justify-start text-sm">
               <div className="flex items-center gap-1.5 text-gray-500">
@@ -86,14 +86,14 @@ export default async function PerfilPage({ params }: { params: { id: string } })
                 Miembro desde {timeAgo(user.createdAt)}
               </div>
               <div className="flex items-center gap-1.5 text-gray-500">
-                <Calendar className="w-4 h-4 text-brand-400" />
-                <span className="text-white font-medium">{user._count.eventosCreados}</span>
-                eventos organizados
+                <Calendar className="w-4 h-4 text-brand-500" />
+                <span className="text-gray-900 font-semibold">{user._count.eventosCreados}</span>
+                &nbsp;eventos organizados
               </div>
               <div className="flex items-center gap-1.5 text-gray-500">
-                <Users className="w-4 h-4 text-brand-400" />
-                <span className="text-white font-medium">{user._count.asistencias}</span>
-                eventos asistidos
+                <Users className="w-4 h-4 text-brand-500" />
+                <span className="text-gray-900 font-semibold">{user._count.asistencias}</span>
+                &nbsp;eventos asistidos
               </div>
             </div>
           </div>
@@ -103,7 +103,7 @@ export default async function PerfilPage({ params }: { params: { id: string } })
       {/* Eventos del organizador */}
       {eventos.length > 0 ? (
         <div>
-          <h2 className="text-xl font-bold text-white mb-5">
+          <h2 className="text-xl font-bold text-gray-900 mb-5">
             Próximos eventos de {user.nombre}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -115,7 +115,7 @@ export default async function PerfilPage({ params }: { params: { id: string } })
       ) : (
         <div className="card py-12 text-center">
           <div className="text-4xl mb-4">🎈</div>
-          <p className="text-gray-400">
+          <p className="text-gray-500">
             {user.nombre} no tiene eventos próximos publicados
           </p>
         </div>
